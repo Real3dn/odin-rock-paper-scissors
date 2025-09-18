@@ -1,0 +1,2 @@
+#info
+This is the project of TOP's JS of Rock Paper Scissors. It's all happening in the console (for now) perhaps in the future we will add buttons and clicks. it maybe differs a bit than other learners, but probably not much. And at the end, it gets the job done.
