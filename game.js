@@ -12,74 +12,69 @@ function getBotChoice ()
     }
     return "scissors"
 }
-
-function getHumanChoice()
-{
-    let choice = prompt("Please Enter Your Choice: ")
-    return choice.toLowerCase()
-}
+let msg=Element
+msg=document.querySelector('#msg')
 let humanScore=0
 let botScore=0
 function playRound(humanChoice, botChoice)
 {
+    humanChoice=humanChoice.toLowerCase()
     console.log("=============================")
     console.log("The player chose: " + humanChoice)
     console.log("The bot chose: " + botChoice)
     if (humanChoice===botChoice)
     {
-        alert("DRAW!")
         console.log("DRAW!")
+        msg.textContent = `DRAW! Human:${humanScore} : Bot:${botScore}`
     }
     else if (humanChoice==="rock" && botChoice==="scissors")
     {
-        alert("You Win! Rock beats scissors!")
         console.log("You Win! Rock beats scissors!")
+        msg.textContent = `You Win! Human:${humanScore} : Bot:${botScore}`
+
         humanScore++
     }
     else if (humanChoice==="rock" && botChoice==="paper")
     {
-        alert("You Lose! Paper beats rock!")
         console.log("You Lose! Paper beats rock!")
         botScore++
+        msg.textContent = `You Lose! Human:${humanScore} : Bot:${botScore}`
     }
     else if (humanChoice==="scissors" && botChoice==="paper")
     {
-        alert("You Win! Scissors beats paper!")
         console.log("You Win! Scissors beats paper!")
         humanScore++
+        msg.textContent = `You Win! Human:${humanScore} : Bot:${botScore}`
     }
     else if (humanChoice==="scissors" && botChoice==="rock")
     {
-        alert("You Lose! Rock beats scissors!")
         console.log("You Lose! Rock beats scissors!")
         botScore++
+        msg.textContent = `You Lose! Human:${humanScore} : Bot:${botScore}`
     }
     else if (humanChoice==="paper" && botChoice==="rock")
-    {
-        alert("You Win! Paper beats rock!")
+        {
         console.log("You Win! Paper beats rock!")
         humanScore++
+        msg.textContent = `You Win! Human:${humanScore} : Bot:${botScore}`
     }
     else if (humanChoice==="paper" && botChoice==="scissors")
     {
-        alert("You Lose! Scissors beats paper!")
         console.log("You Lose! Scissors beats paper!")
         botScore++
+        msg.textContent = `You Lose! Human:${humanScore} : Bot:${botScore}`
     }
-
 }
-
-function playGame()
+function playGame(humanChoice)
 {
-    for (let i =0;i<5;i++)
-    {
-        const humanChoice = getHumanChoice()
         const botChoice = getBotChoice()
         playRound(humanChoice,botChoice)
         console.log("PLAYER SCORE: " + humanScore + ": BOT SCORE: " + botScore)
-    }
-    if (humanScore===botScore)
+    if (humanScore>=3 || botScore>=3)
     {
+        
+    if (humanScore===botScore)
+        {
         console.log("DRAW!")
         alert("DRAW!")
     }
@@ -89,9 +84,15 @@ function playGame()
         alert("CONGRATULATIONS YOU WIN!")
     }
     if (humanScore<botScore)
-    {
+        {
         console.log("L LOSER YOU LOSE!")
         alert("L LOSER YOU LOSE!")
     }
+    humanScore=0
+    botScore=0
 }
-playGame()
+}
+let btns = document.querySelectorAll('button')
+btns.forEach((btn)=> {
+    btn.addEventListener('click', () => playGame(btn.textContent))
+})
